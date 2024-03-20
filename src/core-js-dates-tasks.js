@@ -181,19 +181,20 @@ function isDateInPeriod(date, period) {
  */
 function formatDate(date) {
   const dateNew = new Date(date);
-  let hours = dateNew.getHours();
-  const min = dateNew.getMinutes().toString().padStart(2, '0');
-  const sec = dateNew.getSeconds().toString().padStart(2, '0');
+  let hours = dateNew.getUTCHours();
+  const min = dateNew.getUTCMinutes().toString().padStart(2, '0');
+  const sec = dateNew.getUTCSeconds().toString().padStart(2, '0');
   let ampm = 'AM';
 
   if (hours >= 12) {
     ampm = 'PM';
+    hours -= 12;
   }
   if (hours === 0) {
     hours = 12;
   }
 
-  return `${dateNew.getMonth() + 1}/${dateNew.getDate()}/${dateNew.getFullYear()}, ${hours}:${min}:${sec} ${ampm}`;
+  return `${dateNew.getUTCMonth() + 1}/${dateNew.getUTCDate()}/${dateNew.getUTCFullYear()}, ${hours}:${min}:${sec} ${ampm}`;
 }
 
 /**
